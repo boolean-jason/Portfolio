@@ -667,6 +667,111 @@ footer {
   letter-spacing: 0.03em; max-width: 560px; line-height: 1.6;
 }
 
+.morph-lab-wrap {
+  position: relative;
+}
+
+.morph-toolbar {
+  position: absolute;
+  z-index: 4;
+  top: 18px;
+  left: 18px;
+  width: min(270px, calc(100% - 36px));
+  border: 1px solid var(--glass-border);
+  background: rgba(5, 5, 5, 0.86);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 8px 8px 0 rgba(236, 231, 218, 0.035);
+  font-family: var(--font-mono);
+}
+
+.morph-toolbar-head,
+.morph-toolbar-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 10px;
+  color: var(--grey);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.morph-toolbar-head { border-bottom: 1px solid var(--grey-line); }
+.morph-toolbar-foot { border-top: 1px solid var(--grey-line); }
+
+.morph-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--grey-line);
+}
+
+.morph-options button {
+  border: 0;
+  padding: 12px 10px;
+  background: rgba(8, 8, 8, 0.98);
+  color: var(--grey);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  text-align: left;
+  text-transform: uppercase;
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.morph-options button span {
+  margin-right: 8px;
+  color: var(--grey-line);
+}
+
+.morph-options button:hover,
+.morph-options button:focus-visible {
+  outline: none;
+  background: var(--panel);
+  color: var(--cream);
+  box-shadow: inset 2px 0 0 var(--cream-dim);
+}
+
+.morph-options button.active {
+  background: var(--cream);
+  color: var(--void);
+}
+
+.morph-options button.active span { color: var(--grey); }
+
+.morph-toolbar-foot i {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--status);
+  box-shadow: 0 0 8px var(--status);
+  animation: status-pulse 1.8s ease-in-out infinite;
+}
+
+@media (max-width: 600px) {
+  .morph-toolbar {
+    top: 10px;
+    left: 10px;
+    width: calc(100% - 20px);
+  }
+
+  .morph-options {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .morph-options button {
+    padding: 10px 5px;
+    font-size: 7px;
+    text-align: center;
+  }
+
+  .morph-options button span { display: none; }
+}
+
 footer a { color: var(--cream-dim); transition: color 0.2s ease; }
 footer a:hover { color: var(--cream); }
 

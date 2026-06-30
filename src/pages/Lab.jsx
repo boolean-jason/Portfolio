@@ -1,10 +1,18 @@
-import { Suspense } from 'react'
+import { Suspense, useState } from 'react'
 import FieldExperiment from '../components/lab/FieldExperiment.jsx'
 import XRayReveal from '../components/lab/XRayReveal.jsx'
-import TouchSwarm from '../components/lab/TouchSwarm.jsx'
 import ParticleMorph from '../components/lab/ParticleMorph.jsx'
 
+const MORPH_SHAPES = [
+  ['sphere', 'Sphere'],
+  ['knot', 'Torus knot'],
+  ['helix', 'Helix'],
+  ['cube', 'Cube'],
+]
+
 export default function Lab() {
+  const [morphShape, setMorphShape] = useState('sphere')
+
   return (
     <>
       <nav className="nav">
@@ -63,40 +71,44 @@ export default function Lab() {
           </div>
         </section>
 
-        <section className="section" id="touch">
+        <section className="section morph-section" id="morph">
           <div className="container">
             <div className="section-header">
-              <span className="eyebrow">TOUCH.NET</span>
+              <span className="eyebrow">MORPH.FIELD</span>
               <span className="section-index">EXP. 003</span>
             </div>
-            <div className="lab-canvas-wrap panel-deep">
+            <div className="lab-canvas-wrap panel-deep morph-lab-wrap">
+              <div className="morph-toolbar" aria-label="Choose a particle formation">
+                <div className="morph-toolbar-head">
+                  <span>FORMATION.SELECT</span>
+                  <span>04 AVAILABLE</span>
+                </div>
+                <div className="morph-options">
+                  {MORPH_SHAPES.map(([value, label], index) => (
+                    <button
+                      key={value}
+                      type="button"
+                      className={morphShape === value ? 'active' : ''}
+                      aria-pressed={morphShape === value}
+                      onClick={() => setMorphShape(value)}
+                    >
+                      <span>0{index + 1}</span>{label}
+                    </button>
+                  ))}
+                </div>
+                <div className="morph-toolbar-foot">
+                  <span><i /> ACTIVE</span>
+                  <span>{morphShape.toUpperCase()}</span>
+                </div>
+              </div>
               <Suspense fallback={null}>
-                <TouchSwarm />
+                <ParticleMorph shape={morphShape} />
               </Suspense>
             </div>
             <p className="lab-caption">
-              A particle swarm pulled toward the cursor with spring physics,
-              picking up a warm-to-cool color shift the faster it moves -
-              inspired by edankwan's touch experiments.
-            </p>
-          </div>
-        </section>
-
-        <section className="section" id="particles">
-          <div className="container">
-            <div className="section-header">
-              <span className="eyebrow">PARTICLES.3D</span>
-              <span className="section-index">EXP. 004</span>
-            </div>
-            <div className="lab-canvas-wrap panel-deep">
-              <Suspense fallback={null}>
-                <ParticleMorph />
-              </Suspense>
-            </div>
-            <p className="lab-caption">
-              Three thousand points morphing between a sphere and a torus
-              knot, scrubbed by cursor position - inspired by Codrops' 3D
-              particle explorations.
+              Choose a formation and move across the field. Every selection
+              reshapes the particle cloud while your cursor bends it locally
+              with spring physics and a reactive color pulse.
             </p>
           </div>
         </section>
