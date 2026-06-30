@@ -20,8 +20,8 @@ export default function Lab() {
             <span className="eyebrow">LAB.SYS</span>
             <h1 className="lab-title">experiments</h1>
             <p className="lab-sub">
-              A space for interactive WebGL pieces outside the main site -
-              built with React Three Fiber and custom GLSL shaders.
+              A digital playground for real-time 3D, motion and interaction - 
+              where I turn curious ideas into responsive visual experiments
             </p>
           </div>
         </section>
@@ -103,7 +103,7 @@ export default function Lab() {
       </main>
 
       <footer>
-        <span>&copy; {new Date().getFullYear()} Jason Le</span>
+        <span>&copy; {new Date().getFullYear()} Jason Huynh Le</span>
         <a href="#/" className="lab-back-btn">&larr; Back to portfolio</a>
       </footer>
     </>
